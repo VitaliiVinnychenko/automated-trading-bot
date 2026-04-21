@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "description": "Optimal trading parameters derived from simulation sweeps across bull/bear regimes and balance tiers. Each tier uses the top-return parameter set from its simulation group.",
+  "disable_bear_trading": false,
+  "strategy": {
+    "selection_rule": "Match the active market regime, then pick the balance tier whose range contains the current account balance.",
+    "regime_detection": {
+      "note": "Determine regime externally (e.g., trend filter, MA slope, higher-TF bias) before selecting parameters."
+    }
+  },
+  "regimes": {
+    "bull": {
+      "description": "Tighter take-profit and high leverage dominate; win rates 86-87%.",
+      "default": {
+        "take_profit_pct": 2.6,
+        "stop_loss_pct": 10.5,
+        "leverage": 15,
+        "risk_per_trade": 0.25
+      },
+      "balance_tiers": [
+        {
+          "min_balance": 0,
+          "max_balance": 9999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 1996.19,
+          "expected_win_rate": 86.79
+        },
+        {
+          "min_balance": 10000,
+          "max_balance": 49999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 880.08,
+          "expected_win_rate": 86.88
+        },
+        {
+          "min_balance": 50000,
+          "max_balance": 99999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 402.94,
+          "expected_win_rate": 86.96
+        },
+        {
+          "min_balance": 100000,
+          "max_balance": 249999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 361.46,
+          "expected_win_rate": 86.96
+        },
+        {
+          "min_balance": 250000,
+          "max_balance": 499999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 307.28,
+          "expected_win_rate": 87.04
+        },
+        {
+          "min_balance": 500000,
+          "max_balance": 999999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 188.48,
+          "expected_win_rate": 87.04
+        },
+        {
+          "min_balance": 1000000,
+          "max_balance": 1999999,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 100.66,
+          "expected_win_rate": 87.04
+        },
+        {
+          "min_balance": 2000000,
+          "max_balance": null,
+          "take_profit_pct": 2.6,
+          "stop_loss_pct": 10.5,
+          "leverage": 15,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 50.33,
+          "expected_win_rate": 87.04
+        }
+      ]
+    },
+    "bear": {
+      "description": "Wider TP/SL and reduced leverage as balance scales; win rates 74-77%.",
+      "default": {
+        "take_profit_pct": 4.0,
+        "stop_loss_pct": 12.5,
+        "leverage": 15,
+        "risk_per_trade": 0.20
+      },
+      "balance_tiers": [
+        {
+          "min_balance": 0,
+          "max_balance": 9999,
+          "take_profit_pct": 3.5,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.15,
+          "expected_return_pct": 371.23,
+          "expected_win_rate": 77.27
+        },
+        {
+          "min_balance": 10000,
+          "max_balance": 49999,
+          "take_profit_pct": 3.9,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 218.45,
+          "expected_win_rate": 75.57
+        },
+        {
+          "min_balance": 50000,
+          "max_balance": 99999,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 9,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 114.59,
+          "expected_win_rate": 74.81
+        },
+        {
+          "min_balance": 100000,
+          "max_balance": 249999,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 7,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 68.25,
+          "expected_win_rate": 74.24
+        },
+        {
+          "min_balance": 250000,
+          "max_balance": 499999,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 43.32,
+          "expected_win_rate": 74.24
+        },
+        {
+          "min_balance": 500000,
+          "max_balance": 999999,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.25,
+          "expected_return_pct": 41.15,
+          "expected_win_rate": 74.24
+        },
+        {
+          "min_balance": 1000000,
+          "max_balance": 1999999,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 27.25,
+          "expected_win_rate": 74.24
+        },
+        {
+          "min_balance": 2000000,
+          "max_balance": null,
+          "take_profit_pct": 4.0,
+          "stop_loss_pct": 12.5,
+          "leverage": 15,
+          "risk_per_trade": 0.20,
+          "expected_return_pct": 13.63,
+          "expected_win_rate": 74.24
+        }
+      ]
+    }
+  },
+  "field_definitions": {
+    "disable_bear_trading": "When true, no trades are opened while the BTC 1D MA50/MA100 cross indicates a bear regime.",
+    "take_profit_pct": "Take-profit target as a percentage of entry price.",
+    "stop_loss_pct": "Stop-loss distance as a percentage of entry price.",
+    "leverage": "Position leverage multiplier.",
+    "risk_per_trade": "Fraction of account balance risked per trade (0.25 = 25%).",
+    "min_balance": "Inclusive lower bound of the tier in account currency.",
+    "max_balance": "Inclusive upper bound of the tier; null means open-ended.",
+    "expected_return_pct": "Historical return % from the winning simulation for this tier.",
+    "expected_win_rate": "Historical win rate % from the winning simulation for this tier."
+  }
+}

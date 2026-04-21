@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: trading-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: redis-server --protected-mode yes
+    networks:
+      - trading-network
+
+  prices-worker:
+    image: vinnychenko/scalping-bot
+    container_name: trading-prices-worker
+    env_file: .env
+    environment:
+      - SERVICE=PRICES_WORKER
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+  positions-worker:
+    image: vinnychenko/scalping-bot
+    container_name: trading-positions-worker
+    env_file: .env
+    environment:
+      - SERVICE=POSITIONS_WORKER
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+  discord-messages-worker:
+    image: vinnychenko/scalping-bot
+    container_name: trading-discord-worker
+    env_file: .env
+    environment:
+      - SERVICE=DISCORD_MESSAGES_WORKER
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+  telegram-bot:
+    image: vinnychenko/scalping-bot
+    container_name: trading-telegram-bot
+    env_file: .env
+    environment:
+      - SERVICE=TELEGRAM_BOT
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+  bravos-trade-alerts-worker:
+    image: vinnychenko/scalping-bot
+    container_name: bravos-trade-alerts-worker
+    env_file: .env
+    environment:
+      - SERVICE=BRAVOS_ALERTS
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+  stats-reporter-worker:
+    image: vinnychenko/scalping-bot
+    container_name: trading-stats-reporter
+    env_file: .env
+    environment:
+      - SERVICE=STATS_REPORTER
+    depends_on:
+      - redis
+    volumes:
+      - trading_logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - trading-network
+
+volumes:
+  redis_data:
+  trading_logs:
+
+networks:
+  trading-network:
+    driver: bridge
